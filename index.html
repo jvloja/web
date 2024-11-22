@@ -1,133 +1,117 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RADIO ACTIVA HD LOJA</title>
-    <link rel="icon" type="image/png" href="img/cover.png" />
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="css/animate.css">
-    <link rel="stylesheet" href="css/style.css">    
-    <link rel="manifest" href="/manifest.json">
-</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RADIO ACTIVAHD LOJA</title> 
+<link rel="stylesheet" href="css/styles.css">
 
+</head>
 <body>
 
-    <div class="cover-site">
-        <div id="bgCover"></div>
-        <div class="bg-mask"></div>
-    </div>
-    <main>
-        <section id="player">
-            <div class="container">
-                <div class="row web-player">
-                    <div class="col-12 col-lg-10">
-                        <div class="row">
-                            <div class="col-12 col-md-5">
-                                <div class="cover-album">
-                                    <div id="currentCoverArt"></div>
-                                    <div class="watermark"></div>
-                                </div>
-                            </div>
-                            <div class="col-12 ml-md-auto col-md-6">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="info-current-song">
-                                            <h2 id="currentSong" class="current-song text-uppercase">Música</h2>
-                                            <h3 id="currentArtist" class="current-artist text-captalize">Artista</h3>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="row">
-                                            <div class="play-pause col-12 col-md-6 text-center">
-                                                <button  type="button" class="btn-play" onclick="togglePlay()">
-                                                    <i id="playerButton" class="fa fa-play"></i> <span id="buttonPlay">PLAY</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-12 col-md-6 text-center">
-                                                <div class="row volume-control">
-                                                    <div class="volume-icon col-1">
-                                                        <i class="fa fa-volume-up"></i>
-                                                    </div>
-                                                    <div class="volume-slide col-10 text-center">       
-                                                        <input type="range" id="volume" step="1" min="0" max="100" value="80" onchange="updateVolume(this.value)">
-                                                        <label for="volume">Volume:</label>
-                                                        <span id="volIndicator">80</span> %
-                                                    </div>
-                                                </div>
-                                            </div> 
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-12 col-md-6 text-center call-lyrics">
-                                                <a href="#" class="lyrics"  data-target="#modalLyrics">Letra de la música</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row historic hidden">
-                    <div class="col-12">
-                        <h2>MÚSICAS RECIENTES</h2>
-                        <div class="row" id="historicSong">
-                            <article class="col-12 col-md-6">
-                                <div class="cover-historic" id="cover-historic-1"></div>
-                                <div class="music-info">
-                                    <div class="song">Música</div>
-                                    <div class="artist">Artista</div>
-                                </div>
-                            </article>
-                            <article class="col-12 col-md-6">
-                                <div class="cover-historic" id="cover-historic-2"></div>
-                                <div class="music-info">
-                                    <div class="song">Música</div>
-                                    <div class="artist">Artista</div>
-                                </div>
-                            </article>                              
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-    <div class="modal fade" id="modalLyrics" tabindex="-1" role="dialog" aria-labelledby="lyricsSong" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="lyricsSong">Letra</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                
-                <div class="modal-body" id="lyric"></div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-dismiss="modal">Fechar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/script.js"></script>
-    <script>
-        if ('serviceWorker' in navigator) {
-          window.addEventListener('load', function() {
-            navigator.serviceWorker.register('/service-worker.js')
-              .then(function(registration) {
-                console.log('Service Worker registrado com sucesso:', registration);
-              }, function(err) {
-                console.log('Falha ao registrar o Service Worker:', err);
-              });
-          });
-        }
-      </script>      
-</body>
+<div class="player">
+  <div class="album-cover-container">
+    <img id="album-cover" class="album-cover" src="https://i.postimg.cc/pLwGfGXh/portada.png" alt="Imagen del artista o logo de la radio"> 
+    <div class="album-cover-overlay"></div>
+  </div>
 
+  <div class="live-button">
+    <span>EN VIVO</span>
+    <div class="live-circle"></div>
+  </div>
+
+  <div class="audio-info">
+    <div id="song-title">Cargando título...</div>
+    <div id="artist-name">Cargando artista...</div>
+  </div>
+
+  <audio id="audio-player" src="https://stream.zeno.fm/ak96cngy808uv" preload="auto"></audio> 
+
+  <div class="controls">
+    <button id="play-stop-button" class="play-stop-button" onclick="togglePlayStop()">
+      <svg class="play-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#0a1f3d" width="24" height="24">
+        <path d="M8 5v14l11-7z"/>
+      </svg>
+      <svg class="stop-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#0a1f3d" width="24" height="24" style="display: none;">
+        <path d="M6 6h12v12H6z"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="volume-control">
+    <span class="volume-icon">🔊</span>
+    <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="1">
+  </div>
+
+  <div class="duration-bar" id="duration-bar">
+    <div id="progress" class="progress"></div>
+  </div>
+  <div class="time-display">
+    <span id="current-time">0:00</span>
+    <span id="duration">0:00</span>
+  </div>
+
+  <div class="feature-buttons-container">
+    <button id="history-button" class="feature-button" title="Historial">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <polyline points="12 6 12 12 16 14"></polyline>
+      </svg>
+    </button>
+
+    <button id="social-media-button" class="feature-button" title="Redes Sociales">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="18" cy="5" r="3"></circle>
+        <circle cx="6" cy="12" r="3"></circle>
+        <circle cx="18" cy="19" r="3"></circle>
+        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+      </svg>
+    </button>
+
+    <button id="tv-button" class="feature-button" title="TV">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect>
+        <polyline points="17 2 12 7 7 2"></polyline>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<div id="history-modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Historial de canciones</h2>
+    <ul id="song-history-list"></ul>
+  </div>
+</div>
+
+<div id="social-media-modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Redes Sociales</h2>
+    <div id="social-media-links">
+      <a href="https://facebook.com" target="_blank">Facebook</a>
+      <a href="https://twitter.com" target="_blank">Twitter</a>
+      <a href="https://instagram.com" target="_blank">Instagram</a>
+    </div>
+  </div>
+</div>
+
+<div id="tv-modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>TV en vivo</h2>
+    <div id="tv-player">
+      <iframe
+      id=" ak96cngy808uv"
+      title="Inline Frame Example"
+      width="100%"
+      height="300px"
+      src="https://ssh101.com/securelive/index.php?id=kidsenvivo">// 
+    </iframe>
+    </div>
+  </div>
+</div>
+<script src="js/main.js"></script>
+</body>
 </html>
