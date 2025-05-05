@@ -1,0 +1,117 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RADIO ACTIVAHD LOJA</title> 
+<link rel="stylesheet" href="css/styles.css">
+
+</head>
+<body>
+
+<div class="player">
+  <div class="album-cover-container">
+    <img id="album-cover" class="album-cover" src="https://i.postimg.cc/3R0K1BHn/Logo-principal-de-Radio-Activa-2024.png" alt="https://i.postimg.cc/3R0K1BHn/Logo-principal-de-Radio-Activa-2024.png"> 
+    <div class="album-cover-overlay"></div>
+  </div>
+
+  <div class="live-button">
+    <span>EN VIVO</span>
+    <div class="live-circle"></div>
+  </div>
+
+  <div class="audio-info">
+    <div id="song-title">Cargando título...</div>
+    <div id="artist-name">Cargando artista...</div>
+  </div>
+
+  <audio id="audio-player" src="https://stream.zeno.fm/ak96cngy808uv" preload="auto"></audio> 
+
+  <div class="controls">
+    <button id="play-stop-button" class="play-stop-button" onclick="togglePlayStop()">
+      <svg class="play-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#0a1f3d" width="24" height="24">
+        <path d="M8 5v14l11-7z"/>
+      </svg>
+      <svg class="stop-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#0a1f3d" width="24" height="24" style="display: none;">
+        <path d="M6 6h12v12H6z"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="volume-control">
+    <span class="volume-icon">🔊</span>
+    <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="1">
+  </div>
+
+  <div class="duration-bar" id="duration-bar">
+    <div id="progress" class="progress"></div>
+  </div>
+  <div class="time-display">
+    <span id="current-time">0:00</span>
+    <span id="duration">0:00</span>
+  </div>
+
+  <div class="feature-buttons-container">
+    <button id="history-button" class="feature-button" title="Historial">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <polyline points="12 6 12 12 16 14"></polyline>
+      </svg>
+    </button>
+
+    <button id="social-media-button" class="feature-button" title="Redes Sociales">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="18" cy="5" r="3"></circle>
+        <circle cx="6" cy="12" r="3"></circle>
+        <circle cx="18" cy="19" r="3"></circle>
+        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+      </svg>
+    </button>
+
+    <button id="tv-button" class="feature-button" title="TV">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect>
+        <polyline points="17 2 12 7 7 2"></polyline>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<div id="history-modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Historial de canciones</h2>
+    <ul id="song-history-list"></ul>
+  </div>
+</div>
+
+<div id="social-media-modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Redes Sociales</h2>
+    <div id="social-media-links">
+      <a href="https://www.facebook.com/radioactivaloja/" target="_blank">Facebook</a>
+      <a href="https://twitter.com/vinicio_polo?s=08" target="_blank">Twitter</a>
+      <a href="https://instagram.com/radio_activa_loja?utm_medium=copy_link" target="_blank">Instagram</a>
+    </div>
+  </div>
+</div>
+
+<div id="tv-modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Radio en vivo</h2>
+    <div id="tv-player">
+      <iframe
+      id="ak96cngy808uv"
+      title="RADIO ACTIVAHD LOJA"
+      width="100%"
+      height="300px"
+      src="https://radioactivahdloja.blogspot.com">// 
+    </iframe>
+    </div>
+  </div>
+</div>
+<script src="js/main.js"></script>
+</body>
+</html>
