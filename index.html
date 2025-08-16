@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Radio Player</title>
+    
+    <!-- External Dependencies -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Project Styles -->
+    <link rel="stylesheet" href="styles/variables.css">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/player.css">
+    <!-- Add social media icons styles -->
+    <link rel="stylesheet" href="styles/social.css">
+
+</head>
+<body>
+    <div id="player-container">
+        <img id="artist-artwork" 
+             src="https://api.radiopro.site/?pass=6rMcTRPPTD&action=trackartwork" 
+             alt="Artist Artwork">
+        
+
+        <div class="controls">
+            <button id="play-pause-btn">
+                <i class="fas fa-play"></i>
+            </button>
+        </div>
+
+        <div id="volume-container">
+            <i id="volume-icon" class="fas fa-volume-up"></i>
+            <input type="range" id="volume-control" min="0" max="1" step="0.1" value="1">
+        </div>
+
+        <div id="track-info">
+            <h3 id="artist-name">Radio Station</h3>
+            <p id="track-title">Connecting...</p>
+            <p id="album-info">Please wait</p>
+            <div id="progress-container">
+                <div id="progress-bar"></div>
+            </div>
+            <div id="time-info">
+                <span id="current-time">0:00</span>
+                <span id="total-time">0:00</span>
+            </div>
+        </div>
+
+        <p id="error-message"></p>
+
+        <audio id="radio-player" crossorigin="anonymous"></audio>
+
+        <!-- New Social Media Menu -->
+        <div id="social-menu-toggle">
+            <i class="fas fa-share-alt"></i>
+        </div>
+        <div id="social-menu">
+            <a href="https://www.facebook.com/radioactivaloja/" class="social-icon facebook" target="_blank">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://instagram.com/radio_activa_loja?utm_medium=copy_link" class="social-icon instagram" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://twitter.com/vinicio_polo?s=08" class="social-icon twitter" target="_blank">
+                <i class="fab fa-twitter"></i>
+            </a>
+    
+        </div>
+    </div>
+
+    <!-- Modules -->
+    <script type="importmap">
+    {
+        "imports": {
+            "./js/config.js": "./js/config.js",
+            "./js/utils.js": "./js/utils.js",
+            "./js/radio-player.js": "./js/radio-player.js",
+            "./js/main.js": "./js/main.js"
+        }
+    }
+    </script>
+    <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/social-menu.js"></script>
+</body>
+</html>

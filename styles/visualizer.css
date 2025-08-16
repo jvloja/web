@@ -1,0 +1,23 @@
+#audio-visualizer {
+    position: relative;
+    width: 100%; /* Match artwork width */
+    max-width: 400px; /* Match artwork max-width */
+    height: 50px; /* Reasonable height for bars */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto; /* Center and add some spacing */
+    overflow: hidden;
+}
+
+.visualizer-bar {
+    width: 4px;
+    height: 10px;
+    margin: 0 2px;
+    background: rgba(255, 255, 255, 0.5);
+    transition: height 0.05s ease; /* Smooth height transitions */
+    border-radius: 2px;
+    justify-content: center;
+    align-items: center;
+    will-change: height; /* Hint to browser for performance */
+}

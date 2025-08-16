@@ -1,0 +1,25 @@
+:root {
+    --primary-color: #000C3D;
+    --secondary-color: #000C3D;
+    --background-color: linear-gradient(135deg, #000C3D 0%, #000C3D 100%);
+    --text-color: #e6e6e6;
+    --accent-color: #00d4ff;
+    
+    
+    /* New color variables for better contrast and modern look */
+    --gradient-primary: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    --shadow-subtle: 0 8px 24px rgba(0, 0, 0, 0.1);
+    --blur-background: rgba(0, 12, 61, 0.10);
+    
+    /* New multicolor background variables */
+    --multicolor-gradient: linear-gradient(
+        45deg, 
+        #000C3D, 
+
+    );
+    --multicolor-gradient-animated: linear-gradient(
+        -45deg, 
+        #000C3D, 
+        #000C3D
+    );
+}
