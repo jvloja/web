@@ -1,0 +1,229 @@
+#player-container {
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+    max-width: none; /* Remove any max-width constraints */
+    padding: 20px;
+    border-radius: 0; /* Remove border radius for full-screen look */
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: none; /* Remove box shadow */
+    backdrop-filter: blur(10px);
+    background: rgba(0, 9, 38, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0; /* Remove any margins */
+    position: fixed; /* Ensure it covers the entire viewport */
+    top: 0;
+    left: 0;
+    overflow: hidden; /* Prevent any potential scrolling */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#artist-artwork {
+    width: 100%;
+    max-width: 400px;
+    height: 400px;
+    max-height: 400px;
+    aspect-ratio: 1 / 1; /* Square aspect ratio */
+    object-fit: cover;
+    border-radius: 15px;
+    margin: 0 auto 30px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+#artist-artwork:hover {
+    transform: scale(1.05);
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+#play-pause-btn {
+    width: 60px;
+    height: 60px;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: var(--gradient-primary);
+    color: white;
+    font-size: 24px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+#play-pause-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+#volume-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 10px;
+    width: 100%;
+    max-width: 300px;
+}
+
+#volume-icon {
+    font-size: 20px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+#volume-control {
+    flex-grow: 1;
+    -webkit-appearance: none;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    outline: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+#volume-control::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background: var(--thumb-color, var(--accent-color)); /* Use dynamic thumb color */
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+#track-info {
+    text-align: center;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 400px;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7); /* Stronger text shadow */
+}
+
+#artist-name {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6); /* More pronounced shadow */
+    color: var(--text-color);
+}
+
+#track-title {
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 5px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Stronger, more defined shadow */
+}
+
+#album-info {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5); /* Enhanced shadow */
+}
+
+#progress-container {
+    width: 100%;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+#progress-bar {
+    height: 100%;
+    width: 0;
+    background: var(--accent-color);
+    border-radius: 10px;
+    transition: width 0.3s ease;
+    max-width: 100%;
+}
+
+#time-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+#error-message {
+    color: #ff6b6b;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+/* Fix audio context issues on mobile */
+audio {
+    position: absolute;
+    top: -1000px;
+    left: -1000px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+    #player-container {
+        padding: 15px;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    #artist-artwork {
+        width: 70vw;
+        max-width: 250px;
+        height: 70vw;
+        max-height: 250px;
+        margin-bottom: 20px;
+    }
+    
+    #play-pause-btn {
+        width: 70px;
+        height: 70px;
+        font-size: 28px;
+    }
+    
+    #track-info {
+        max-width: 90vw;
+    }
+}
+
+@media (max-width: 480px) {
+    #artist-artwork {
+        width: 80vw;
+        max-width: 200px;
+        height: 80vw;
+        max-height: 200px;
+    }
+    
+    #play-pause-btn {
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+    }
+}
+
+/* Touch-friendly buttons */
+#play-pause-btn, .social-icon {
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
