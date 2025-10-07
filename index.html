@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Radio Activahd Loja</title>
+    
+    <!-- External Dependencies -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Project Styles -->
+    <link rel="stylesheet" href="styles/variables.css">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/player.css">
+    <link rel="stylesheet" href="styles/social.css">
+    <link rel="stylesheet" href="styles/visualizer.css">
+    
+    <!-- Mobile optimizations -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#000926">
+    
+    <!-- Prevent zoom on mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    
+    <!-- iOS specific -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-title" content="Radio Activahd Loja">
+    
+    <!-- Android specific -->
+    <meta name="mobile-web-app-capable" content="yes">
+</head>
+<body>
+    <div id="player-container">
+        <img id="artist-artwork" 
+             src="img/cover.png" 
+             alt="Artist Artwork"
+             loading="lazy"
+             crossorigin="anonymous"
+             draggable="false">
+        
+        <div class="controls">
+            <button id="play-pause-btn" type="button" aria-label="Play/Pause">
+                <i class="fas fa-play"></i>
+            </button>
+        </div>
+
+        <div id="volume-container">
+            <i id="volume-icon" class="fas fa-volume-up" aria-label="Volume"></i>
+            <input type="range" id="volume-control" min="0" max="1" step="0.1" value="1" aria-label="Volume control">
+        </div>
+
+        <div id="track-info">
+            <h3 id="artist-name">Radio Activahd Loja</h3>
+            <p id="track-title">Conectando...</p>
+
+           
+        </div>
+
+        <p id="error-message" role="alert" aria-live="polite"></p>
+
+        <audio id="radio-player" preload="none" crossorigin="anonymous" playsinline webkit-playsinline></audio>
+
+        <!-- Social Media Menu -->
+        <div id="social-menu-toggle" role="button" tabindex="0" aria-label="Toggle social menu">
+            <i class="fas fa-share-alt"></i>
+        </div>
+        <div id="social-menu" role="menu">
+              <a href="https://www.facebook.com/radioactivaloja/" class="social-icon facebook" target="_blank">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://instagram.com/radio_activa_loja?utm_medium=copy_link" class="social-icon instagram" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://twitter.com/vinicio_polo?s=08" class="social-icon twitter" target="_blank">
+                <i class="fab fa-twitter"></i>
+            </a>
+
+        </div>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/social-menu.js"></script>
+</body>
+</html>
