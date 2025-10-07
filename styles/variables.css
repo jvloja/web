@@ -1,0 +1,16 @@
+:root {
+    --primary-color: #6a11cb;
+    --secondary-color: #2575fc;
+    --background-color: #000926;
+    --text-color: #e6e6e6;
+    --accent-color: #00d4ff;
+    --card-background: linear-gradient(145deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+    
+    --gradient-primary: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    --shadow-subtle: 0 8px 24px rgba(0, 0, 0, 0.1);
+    --blur-background: rgba(255, 255, 255, 0.1);
+    
+    /* Smooth color transitions */
+    transition: --primary-color 0.8s ease, --secondary-color 0.8s ease, --accent-color 0.8s ease;
+}
+

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0">
+    <title>RADIO ACTIVAHD LOJA</title>
+    
+    <!-- External Dependencies -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Project Styles -->
+    <link rel="stylesheet" href="styles/variables.css">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/player.css">
+    <link rel="stylesheet" href="styles/social.css">
+    
+    <!-- Mobile optimizations -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#0a0a0a">
+    
+    <!-- Prevent zoom on mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    
+    <!-- iOS specific -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-title" content="RADIO ACTIVAHD LOJA">
+    
+    <!-- Android specific -->
+    <meta name="mobile-web-app-capable" content="yes">
+</head>
+<body>
+    <!-- Background artwork removed as requested -->
+    
+    <div id="player-container">
+        <img id="artist-artwork" 
+             src="img/cover.png" 
+             alt="Artist Artwork"
+             loading="lazy"
+             crossorigin="anonymous"
+             draggable="false"
+             style="z-index: 20;">
+    
+
+        <div id="track-info">
+             <h3 id="name">RADIO ACTIVAHD LOJA</h3>
+            <p id="artist-name">Cargando...</p>
+            <p id="track-title">Cargando...</p>
+            <div id="progress-container">
+                <div id="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <div id="time-info">
+                <span id="current-time">0:00</span>
+                <span id="total-time">0:00</span>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="play-pause-btn" type="button" aria-label="Play/Pause">
+                <i class="fas fa-play"></i>
+            </button>
+        </div>
+
+        <div id="volume-container">
+            <i id="volume-icon" class="fas fa-volume-up" aria-label="Volume" style="color: white;"></i>
+            <input type="range" id="volume-control" min="0" max="1" step="0.1" value="1" aria-label="Volume control">
+        </div>
+
+   
+
+        <audio id="radio-player" preload="none" crossorigin="anonymous" playsinline webkit-playsinline></audio>
+
+        <!-- Social Media Menu -->
+        <div id="social-menu-toggle" role="button" tabindex="0" aria-label="Toggle social menu">
+            <i class="fas fa-share-alt"></i>
+        </div>
+        <div id="social-menu" role="menu" aria-hidden="true">
+            <a href="https://facebook.com" class="social-icon facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://instagram.com" class="social-icon instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://twitter.com" class="social-icon twitter" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                <i class="fab fa-twitter"></i>
+            </a>
+
+            </a>
+        </div>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/social-menu.js"></script>
+</body>
+</html>
