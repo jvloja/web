@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=350, initial-scale=1.0">
+    <title>Radio Activa HD Loja</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            width: 350px;
+            height: 450px;
+            background: linear-gradient(180deg, #0a0a0a 0%, #121212 50%, #0d0d0d 100%);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+            color: #fff;
+            position: relative;
+        }
+        
+        .header {
+            padding: 10px 0 4px;
+            text-align: center;
+            z-index: 2;
+        }
+        .station-name {
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #fff;
+        }
+        .live-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin-top: 2px;
+            font-size: 9px;
+            color: #F527DA;
+            font-weight: 700;
+        }
+        .live-dot {
+            width: 5px;
+            height: 5px;
+            background: #F527DA;
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(0.6); }
+        }
+        
+        .album-container {
+            width: 185px;
+            height: 185px;
+            margin: 6px auto;
+            position: relative;
+            z-index: 2;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.7);
+            background: #1a1a1a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .album-art {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .album-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #2a0845, #0f0c29);
+            font-size: 24px;
+            font-weight: bold;
+            color: rgba(255,255,255,0.7);
+            text-align: center;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .album-placeholder svg {
+            width: 48px;
+            height: 48px;
+            fill: #F527DA;
+            opacity: 0.7;
+        }
+        .album-placeholder span {
+            font-size: 10px;
+        }
+
+        .track-info {
+            text-align: center;
+            padding: 0 20px;
+            z-index: 2;
+            margin-top: 6px;
+            min-height: 48px;
+        }
+        .track-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .track-artist {
+            font-size: 11px;
+            color: #a7a7a7;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .progress-area {
+            width: 260px;
+            margin: 8px 0;
+            z-index: 2;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 3px;
+            background: #333;
+            border-radius: 2px;
+            position: relative;
+        }
+        .progress-fill {
+            height: 100%;
+            background: #F527DA;
+            border-radius: 2px;
+            width: 100%;
+            animation: pulseWidth 3s ease-in-out infinite;
+        }
+        @keyframes pulseWidth {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+        .time-display {
+            display: flex;
+            justify-content: center;
+            font-size: 9px;
+            color: #F527DA;
+            margin-top: 3px;
+            letter-spacing: 1px;
+        }
+        
+        .controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin: 6px 0;
+            z-index: 2;
+        }
+        .btn-icon {
+            background: none;
+            border: none;
+            color: #a7a7a7;
+            cursor: pointer;
+            padding: 4px;
+            transition: all 0.2s;
+        }
+        .btn-icon:hover {
+            color: #fff;
+            transform: scale(1.1);
+        }
+        .btn-icon svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+        .btn-play {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #fff;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            transition: all 0.2s;
+        }
+        .btn-play:hover {
+            transform: scale(1.06);
+            background: #F527DA;
+        }
+        .btn-play:hover svg {
+            fill: #fff;
+        }
+        .btn-play:active {
+            transform: scale(0.95);
+        }
+        .btn-play svg {
+            width: 18px;
+            height: 18px;
+            fill: #000;
+        }
+        
+        .volume-area {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            z-index: 2;
+            padding: 0 22px;
+            width: 100%;
+            margin-top: 4px;
+        }
+        .volume-area svg {
+            width: 13px;
+            height: 13px;
+            fill: #a7a7a7;
+        }
+        .volume-slider {
+            flex: 1;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 3px;
+            background: #404040;
+            border-radius: 2px;
+            outline: none;
+        }
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #F527DA;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .volume-area:hover .volume-slider::-webkit-slider-thumb {
+            opacity: 1;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            margin-top: 8px;
+            font-size: 9px;
+            color: #fff;
+            z-index: 2;
+        }
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+        .stat svg {
+            width: 9px;
+            height: 9px;
+            fill: #F527DA;
+        }
+        
+        .status-msg {
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 10px;
+            color: #e74c3c;
+            z-index: 10;
+            background: rgba(0,0,0,0.9);
+            padding: 4px 12px;
+            border-radius: 12px;
+            display: none;
+            white-space: nowrap;
+            font-weight: 500;
+        }
+        .status-msg.show {
+            display: block;
+        }
+        .status-msg.success {
+            color: #F527DA;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .track-title, .track-artist {
+            transition: all 0.3s ease;
+        }
+        .track-update {
+            animation: fadeIn 0.3s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="station-name">Radio Activa HD Loja</div>
+        <div class="live-badge">
+            <span class="live-dot"></span>
+            <span>EN VIVO</span>
+        </div>
+    </div>
+
+    <div class="album-container">
+        <img id="albumArt" class="album-art" alt="Album Art" style="display: none;">
+        <div id="albumPlaceholder" class="album-placeholder">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+            <span>Radio Activa</span>
+        </div>
+    </div>
+
+    <div class="track-info">
+        <div class="track-title" id="trackTitle">Radio Activa HD</div>
+        <div class="track-artist" id="trackArtist">Loja - Ecuador</div>
+    </div>
+
+    <div class="progress-area">
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+        <div class="time-display">
+            <span>STREAMING EN VIVO</span>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button class="btn-icon" onclick="toggleMute()" title="Silencio">
+            <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+        </button>
+        
+        <button class="btn-play" id="playBtn" onclick="togglePlay()" title="Play/Pausa">
+            <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <svg id="pauseIcon" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        </button>
+        
+        <button class="btn-icon" onclick="reloadStream()" title="Recargar">
+            <svg viewBox="0 0 24 24"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+        </button>
+    </div>
+
+    <div class="volume-area">
+        <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="80" oninput="setVolume(this.value)">
+    </div>
+
+    <div class="stats">
+        <div class="stat">
+            <svg viewBox="0 0 24 24"><path d="M12 3C7.46 3 3.34 4.78.29 7.67c-.18.18-.29.43-.29.71 0 .28.11.53.29.71l11 12c.39.39 1.02.39 1.41 0l11-12c.18-.18.29-.43.29-.71 0-.28-.11-.53-.29-.71C20.66 4.78 16.54 3 12 3z"/></svg>
+            <span id="bitrate">128 Kbps</span>
+        </div>
+        <div class="stat">
+            <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+            <span id="listeners">--</span>
+        </div>
+        <div class="stat">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            <span id="status">Conectando...</span>
+        </div>
+    </div>
+
+    <div class="status-msg" id="statusMsg"></div>
+
+    <script>
+        // ============================================
+        // CONFIGURACIÓN
+        // ============================================
+        const STREAM_URLS = [
+            'https://usa13.fastcast4u.com/proxy/radioactivahd?mp=/1'
+        ];
+        
+        // ============================================
+        // VARIABLES GLOBALES
+        // ============================================
+        let player = null;
+        let isPlaying = false;
+        let retryCount = 0;
+        let metadataInterval = null;
+        let currentSongText = '';
+        let currentArtistText = '';
+        let lastRawMetadata = '';
+        let imageFetchQueue = null;
+        
+        // ============================================
+        // INICIALIZAR AUDIO
+        // ============================================
+        function createAudio() {
+            if (player) {
+                player.pause();
+                player.src = '';
+                player.load();
+                if (player.parentNode) player.parentNode.removeChild(player);
+                player = null;
+            }
+            
+            player = new Audio();
+            player.preload = 'auto';
+            player.crossOrigin = 'anonymous';
+            
+            const baseUrl = STREAM_URLS[0];
+            const separator = baseUrl.includes('?') ? '&' : '?';
+            player.src = baseUrl + separator + '_nc=' + Date.now();
+            
+            const volumeVal = parseInt(document.getElementById('volumeSlider').value) / 100;
+            player.volume = isNaN(volumeVal) ? 0.8 : volumeVal;
+            
+            player.onerror = function(e) {
+                console.error('Audio error:', player.error);
+                if (isPlaying) handleAudioError();
+            };
+            
+            player.onplaying = () => {
+                hideStatus();
+                retryCount = 0;
+                document.getElementById('status').textContent = 'Activo';
+            };
+            
+            player.onwaiting = () => showStatus('Buffering...', false);
+            player.onstalled = () => showStatus('Reconectando...', false);
+            
+            return player;
+        }
+        
+        // ============================================
+        // REPRODUCCIÓN
+        // ============================================
+        function togglePlay() {
+            if (isPlaying) {
+                pauseAudio();
+            } else {
+                playAudio();
+            }
+        }
+        
+        function playAudio() {
+            if (!player || player.readyState === 0) {
+                createAudio();
+            }
+            
+            if (!player.src || player.src === '') {
+                createAudio();
+            }
+            
+            showStatus('Conectando...', false);
+            
+            const playPromise = player.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    isPlaying = true;
+                    updatePlayButton(true);
+                    hideStatus();
+                    startMetadataPolling();
+                }).catch(err => {
+                    console.error('Playback error:', err);
+                    handlePlayError(err);
+                });
+            }
+        }
+        
+        function pauseAudio() {
+            if (player) {
+                player.pause();
+            }
+            isPlaying = false;
+            updatePlayButton(false);
+            if (metadataInterval) {
+                clearInterval(metadataInterval);
+                metadataInterval = null;
+            }
+        }
+        
+        function updatePlayButton(playing) {
+            const playIcon = document.getElementById('playIcon');
+            const pauseIcon = document.getElementById('pauseIcon');
+            if (playing) {
+                playIcon.style.display = 'none';
+                pauseIcon.style.display = 'block';
+            } else {
+                playIcon.style.display = 'block';
+                pauseIcon.style.display = 'none';
+            }
+        }
+        
+        // ============================================
+        // MANEJO DE ERRORES
+        // ============================================
+        function handlePlayError(err) {
+            retryCount++;
+            if (retryCount <= 5) {
+                showStatus(`Reintentando (${retryCount}/5)...`, false);
+                setTimeout(() => {
+                    createAudio();
+                    playAudio();
+                }, 2000);
+            } else {
+                showStatus('Error de conexión', true);
+                updatePlayButton(false);
+                isPlaying = false;
+            }
+        }
+        
+        function handleAudioError() {
+            if (isPlaying) {
+                handlePlayError(new Error('Network error'));
+            }
+        }
+        
+        function reloadStream() {
+            const wasPlaying = isPlaying;
+            pauseAudio();
+            retryCount = 0;
+            setTimeout(() => {
+                createAudio();
+                if (wasPlaying) playAudio();
+            }, 300);
+        }
+        
+        // ============================================
+        // VOLUMEN
+        // ============================================
+        function setVolume(val) {
+            if (player) player.volume = val / 100;
+        }
+        
+        function toggleMute() {
+            if (!player) return;
+            if (player.volume > 0) {
+                player.dataset.lastVol = player.volume;
+                player.volume = 0;
+                document.getElementById('volumeSlider').value = 0;
+            } else {
+                const last = parseFloat(player.dataset.lastVol) || 0.8;
+                player.volume = last;
+                document.getElementById('volumeSlider').value = last * 100;
+            }
+        }
+        
+        // ============================================
+        // METADATOS - ACTUALIZACIÓN EN TIEMPO REAL
+        // ============================================
+        function startMetadataPolling() {
+            if (metadataInterval) clearInterval(metadataInterval);
+            fetchMetadataNow();
+            metadataInterval = setInterval(fetchMetadataNow, 8000);
+        }
+        
+        function fetchMetadataNow() {
+            const callbackName = 'meta_cb_' + Date.now();
+            
+            window[callbackName] = function(data) {
+                delete window[callbackName];
+                try {
+                    if (data && data.data && data.data[0]) {
+                        const info = data.data[0];
+                        let rawMeta = info.rawmeta || info.song || info.title || '';
+                        
+                        if (rawMeta && rawMeta !== lastRawMetadata) {
+                            lastRawMetadata = rawMeta;
+                            processMetadata(rawMeta, info);
+                        } else if (rawMeta && !lastRawMetadata) {
+                            lastRawMetadata = rawMeta;
+                            processMetadata(rawMeta, info);
+                        }
+                        
+                        // Actualizar stats siempre
+                        if (info.bitrate) {
+                            document.getElementById('bitrate').textContent = info.bitrate + ' Kbps';
+                        }
+                        if (info.listeners) {
+                            document.getElementById('listeners').textContent = info.listeners + ' oyentes';
+                        }
+                    }
+                } catch(e) {
+                    console.error('Metadata parse error:', e);
+                }
+                
+                // Limpiar script
+                const scriptEl = document.getElementById('meta_script_' + callbackName);
+                if (scriptEl) scriptEl.remove();
+            };
+            
+            const script = document.createElement('script');
+            script.id = 'meta_script_' + callbackName;
+            script.src = `https://usa13.fastcast4u.com/external/rpc.php?callback=${callbackName}&m=streaminfo.get&username=radioactivahd&rid=radioactivahd&_=${Date.now()}`;
+            script.onerror = () => {
+                delete window[callbackName];
+                if (script.parentNode) script.remove();
+            };
+            document.body.appendChild(script);
+        }
+        
+        function processMetadata(rawMeta, info) {
+            // Limpiar el metadata
+            let cleanMeta = rawMeta
+                .replace(/FreeSHOUTCAST AutoDJ\s*-\s*/gi, '')
+                .replace(/<[^>]*>/g, '')
+                .replace(/\[.*?\]/g, '')
+                .replace(/\(.*?\)/g, '')
+                .trim();
+            
+            let artist = '';
+            let song = '';
+            
+            if (cleanMeta.includes(' - ')) {
+                const parts = cleanMeta.split(' - ');
+                artist = parts[0].trim();
+                song = parts.slice(1).join(' - ').trim();
+            } else if (cleanMeta) {
+                song = cleanMeta;
+                artist = 'Radio Activa HD';
+            } else {
+                song = 'En Vivo';
+                artist = 'Radio Activa HD Loja';
+            }
+            
+            // Limitar longitud
+            if (artist.length > 35) artist = artist.substring(0, 32) + '...';
+            if (song.length > 40) song = song.substring(0, 37) + '...';
+            
+            // Actualizar UI solo si cambió
+            const titleEl = document.getElementById('trackTitle');
+            const artistEl = document.getElementById('trackArtist');
+            
+            let needsUpdate = false;
+            
+            if (song !== currentSongText) {
+                currentSongText = song;
+                titleEl.textContent = song;
+                titleEl.classList.add('track-update');
+                setTimeout(() => titleEl.classList.remove('track-update'), 300);
+                needsUpdate = true;
+            }
+            
+            if (artist !== currentArtistText) {
+                currentArtistText = artist;
+                artistEl.textContent = artist;
+                artistEl.classList.add('track-update');
+                setTimeout(() => artistEl.classList.remove('track-update'), 300);
+                needsUpdate = true;
+            }
+            
+            // Buscar nueva imagen SOLO si la canción cambió
+            if (needsUpdate && artist && song) {
+                searchArtistImage(artist, song);
+            }
+        }
+        
+        // ============================================
+        // BÚSQUEDA DE IMAGEN DE ARTISTA
+        // ============================================
+        async function searchArtistImage(artist, song) {
+            const query = `${artist} ${song}`.trim();
+            
+            // Mostrar placeholder mientras buscamos
+            const imgElement = document.getElementById('albumArt');
+            const placeholder = document.getElementById('albumPlaceholder');
+            
+            // Intentar con Last.fm (mejor para artistas)
+            try {
+                const lastFmKey = '0e2f0a3b4c5d6e7f8a9b0c1d2e3f4a5b'; // API key pública demo
+                const lastFmUrl = `https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${encodeURIComponent(artist)}&api_key=${lastFmKey}&format=json&_=${Date.now()}`;
+                
+                const response = await fetch(lastFmUrl);
+                const data = await response.json();
+                
+                if (data.artist && data.artist.image) {
+                    const images = data.artist.image;
+                    const largeImage = images.find(img => img.size === 'extralarge') || 
+                                      images.find(img => img.size === 'large') ||
+                                      images.find(img => img.size === 'mega');
+                    if (largeImage && largeImage['#text']) {
+                        setAlbumImage(largeImage['#text']);
+                        return;
+                    }
+                }
+            } catch(e) {
+                console.log('Last.fm error, usando iTunes');
+            }
+            
+            // Fallback a iTunes
+            try {
+                const itunesUrl = `https://itunes.apple.com/search?term=${encodeURIComponent(artist)}&entity=musicArtist&limit=1&_=${Date.now()}`;
+                const response = await fetch(itunesUrl);
+                const data = await response.json();
+                
+                if (data.results && data.results.length > 0 && data.results[0].artworkUrl100) {
+                    const imageUrl = data.results[0].artworkUrl100.replace('100x100bb', '600x600bb');
+                    setAlbumImage(imageUrl);
+                    return;
+                }
+            } catch(e) {
+                console.log('iTunes error');
+            }
+            
+            // Fallback a Deezer para buscar por canción
+            searchDeezerImage(artist, song);
+        }
+        
+        function searchDeezerImage(artist, song) {
+            const cb = 'dz_img_' + Date.now();
+            window[cb] = function(resp) {
+                delete window[cb];
+                if (resp && resp.data && resp.data.length > 0) {
+                    const track = resp.data[0];
+                    if (track.album && track.album.cover_medium) {
+                        setAlbumImage(track.album.cover_medium);
+                        return;
+                    }
+                }
+                // Si nada funciona, usar imagen por defecto
+                setAlbumImage('https://jvloja.github.io/web/img/cover.png');
+            };
+            
+            const script = document.createElement('script');
+            script.src = `https://api.deezer.com/search/track?q=${encodeURIComponent(artist + ' ' + song)}&limit=1&output=jsonp&callback=${cb}`;
+            script.onerror = () => {
+                delete window[cb];
+                setAlbumImage('https://jvloja.github.io/web/img/cover.png');
+            };
+            document.body.appendChild(script);
+            
+            setTimeout(() => {
+                if (script.parentNode) script.remove();
+            }, 5000);
+        }
+        
+        function setAlbumImage(url) {
+            const img = document.getElementById('albumArt');
+            const placeholder = document.getElementById('albumPlaceholder');
+            
+            if (!url) {
+                img.style.display = 'none';
+                placeholder.style.display = 'flex';
+                return;
+            }
+            
+            // Añadir timestamp para evitar caché
+            const finalUrl = url + (url.includes('?') ? '&' : '?') + 't=' + Date.now();
+            
+            img.onload = () => {
+                img.style.display = 'block';
+                placeholder.style.display = 'none';
+                img.classList.add('track-update');
+                setTimeout(() => img.classList.remove('track-update'), 300);
+            };
+            
+            img.onerror = () => {
+                // Si falla esta URL, intentar con la default
+                if (!finalUrl.includes('cover.png')) {
+                    img.src = 'https://jvloja.github.io/web/img/cover.png';
+                } else {
+                    img.style.display = 'none';
+                    placeholder.style.display = 'flex';
+                }
+            };
+            
+            img.src = finalUrl;
+        }
+        
+        // ============================================
+        // UI HELPERS
+        // ============================================
+        function showStatus(text, isError) {
+            const el = document.getElementById('statusMsg');
+            el.textContent = text;
+            el.className = 'status-msg show' + (isError ? '' : ' success');
+            setTimeout(() => {
+                if (el.textContent === text) hideStatus();
+            }, 3000);
+        }
+        
+        function hideStatus() {
+            const el = document.getElementById('statusMsg');
+            el.className = 'status-msg';
+        }
+        
+        // ============================================
+        // INICIALIZACIÓN
+        // ============================================
+        window.addEventListener('load', () => {
+            createAudio();
+            fetchMetadataNow();
+            console.log('Radio Activa HD - Player listo, actualización automática activada');
+        });
+        
+        window.addEventListener('beforeunload', () => {
+            if (metadataInterval) clearInterval(metadataInterval);
+            if (player) {
+                player.pause();
+                player.src = '';
+            }
+        });
+    </script>
+</body>
+</html>
